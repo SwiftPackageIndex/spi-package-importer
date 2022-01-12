@@ -1,3 +1,1 @@
 import ImporterCore
-
-Importer.main()
