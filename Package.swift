@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "spi-package-importer",
+    platforms: [
+        .macOS(.v12)
+    ],
     dependencies: [
         .package(name: "swift-argument-parser",
                  url: "https://github.com/apple/swift-argument-parser",
