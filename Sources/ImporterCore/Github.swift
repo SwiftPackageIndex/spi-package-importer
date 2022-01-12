@@ -8,7 +8,11 @@ enum Github {
         var incompleteResults: Bool
 
         struct Item: Codable {
-            var clone_url: String
+            var cloneUrl: String
+
+            enum CodingKeys: String, CodingKey {
+                case cloneUrl = "clone_url"
+            }
         }
 
         enum CodingKeys: String, CodingKey {
