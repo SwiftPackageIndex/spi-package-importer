@@ -44,20 +44,3 @@ func _exit(error: Error) -> Never {
     fflush(stderr)
     _exit(1)
 }
-
-
-extension Task where Success == Void, Failure == Error {
-
-    static func `await`(priority: TaskPriority? = nil, operation: @escaping @Sendable () async throws -> Success) throws {
-        let group = DispatchGroup()
-        group.enter()
-
-        Task.detached {
-            defer { group.leave() }
-            try await operation()
-        }
-
-        group.wait()
-    }
-
-}
