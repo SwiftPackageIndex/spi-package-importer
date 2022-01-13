@@ -19,7 +19,9 @@ enum Output: ExpressibleByArgument {
     func process(packageURLs: [String]) throws {
         switch self {
             case .file(let url):
-                let data = try JSONEncoder().encode(packageURLs)
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = .prettyPrinted
+                let data = try encoder.encode(packageURLs)
                 print("saving to \(url.path)...")
                 try data.write(to: url)
             case .stdout:
