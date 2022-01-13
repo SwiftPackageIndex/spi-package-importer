@@ -57,7 +57,7 @@ struct Fetch: AsyncParsableCommand {
         switch output {
             case .file(let url):
                 let data = try JSONEncoder().encode(packageURLs)
-            print("saving to \(url.path)...")
+                print("saving to \(url.path)...")
                 try data.write(to: url)
             case .stdout:
                 for item in packageURLs {
