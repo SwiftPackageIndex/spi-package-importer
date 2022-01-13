@@ -25,9 +25,10 @@ struct Fetch: AsyncParsableCommand {
         }
 
         var packageURLs = [String]()
+        let query = "in:path Package.swift archived:false fork:false"
 
         if let page = page {
-            let results = try await Github.search(query: "in:path Package.swift",
+            let results = try await Github.search(query: query,
                                                   sortBy: sort,
                                                   orderBy: order,
                                                   token: token,
@@ -41,7 +42,7 @@ struct Fetch: AsyncParsableCommand {
                 defer { currentPage += 1 }
                 print("fetching page \(currentPage)")
                 do {
-                    let results = try await Github.search(query: "in:path Package.swift",
+                    let results = try await Github.search(query: query,
                                                           sortBy: sort,
                                                           orderBy: order,
                                                           token: token,
