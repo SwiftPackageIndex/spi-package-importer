@@ -22,16 +22,7 @@ struct Merge: AsyncParsableCommand {
 
         print("Number of unique urls: \(packageURLs.count)")
 
-        switch output {
-            case .file(let url):
-                let data = try JSONEncoder().encode(packageURLs.sorted())
-                print("saving to \(url.path)...")
-                try data.write(to: url)
-            case .stdout:
-                for item in packageURLs.sorted() {
-                    print(item)
-                }
-        }
+        try output.process(packageURLs: packageURLs.sorted())
     }
 
 
