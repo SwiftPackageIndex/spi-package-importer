@@ -42,11 +42,11 @@ struct Fetch: AsyncParsableCommand {
                 print("fetching page \(currentPage)")
                 do {
                     let results = try await Github.search(query: "in:path Package.swift",
-                                                          sortBy: .updated,
-                                                          orderBy: .descending,
+                                                          sortBy: sort,
+                                                          orderBy: order,
                                                           token: token,
                                                           page: currentPage,
-                                                          perPage: 100)
+                                                          perPage: perPage)
                     let items = results.items.map(\.cloneUrl)
                     packageURLs.append(contentsOf: items)
                     print("fetched \(packageURLs.count) / \(results.totalCount)")
