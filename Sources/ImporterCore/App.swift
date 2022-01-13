@@ -12,7 +12,7 @@ struct Main {
 public struct App: ParsableCommand {
     public static var configuration = CommandConfiguration(
         abstract: "SPI Package Importer",
-        subcommands: [Fetch.self, Merge.self]
+        subcommands: [Diff.self, Fetch.self, Merge.self]
     )
 
     public mutating func run() throws {}

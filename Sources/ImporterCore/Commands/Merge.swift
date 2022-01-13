@@ -10,20 +10,23 @@ struct Merge: AsyncParsableCommand {
     var output: Output = .stdout
 
     func runAsync() async throws {
-        var packageURLs = Set<String>()
-
-        for fname in files {
-            print("Merging \(fname)")
-            let url = URL(fileURLWithPath: fname)
-            let data = try Data(contentsOf: url)
-            let packages = try JSONDecoder().decode([String].self, from: data)
-            packageURLs.formUnion(packages)
-        }
-
-        print("Number of unique urls: \(packageURLs.count)")
+        let packageURLs = try Self.merge(paths: files)
 
         try output.process(packageURLs: packageURLs.sorted())
     }
 
+    static func merge(paths: [String]) throws -> Set<String> {
+        var packageURLs = Set<String>()
 
+        for path in paths {
+            print("Merging \(path)")
+            let url = URL(fileURLWithPath: path)
+            let data = try Data(contentsOf: url)
+            let packages = try JSONDecoder().decode([String].self, from: data)
+            packageURLs.formUnion(packages)
+        }
+        print("Number of unique urls: \(packageURLs.count)")
+
+        return packageURLs
+    }
 }
