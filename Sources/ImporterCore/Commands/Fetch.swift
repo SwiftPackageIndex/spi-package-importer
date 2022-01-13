@@ -2,27 +2,6 @@ import ArgumentParser
 import Foundation
 
 
-enum AppError: Error {
-    case missingGithubToken
-}
-
-
-enum Output: ExpressibleByArgument {
-    case file(URL)
-    case stdout
-
-    init?(argument: String) {
-        switch argument {
-            case "-":
-                self = .stdout
-            default:
-                let url = URL(fileURLWithPath: argument)
-                self = .file(url)
-        }
-    }
-}
-
-
 struct Fetch: AsyncParsableCommand {
     @Option(name: .shortAndLong)
     var output: Output = .file(URL(fileURLWithPath: "result.json"))
