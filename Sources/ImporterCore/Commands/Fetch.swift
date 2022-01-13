@@ -2,14 +2,6 @@ import ArgumentParser
 import Foundation
 
 
-@main
-struct App {
-    static func main() async {
-        await Importer.main()
-    }
-}
-
-
 enum AppError: Error {
     case missingGithubToken
 }
@@ -31,7 +23,7 @@ enum Output: ExpressibleByArgument {
 }
 
 
-struct Importer: AsyncParsableCommand {
+struct Fetch: AsyncParsableCommand {
     @Option(name: .shortAndLong)
     var output: Output = .file(URL(fileURLWithPath: "result.json"))
 
