@@ -4,7 +4,7 @@ import Foundation
 
 struct Fetch: AsyncParsableCommand {
     @Option(name: .shortAndLong)
-    var output: Output = .file(URL(fileURLWithPath: "result.json"))
+    var output: Output = .stdout
 
     @Option(name: .long)
     var order: Github.OrderBy = .descending
@@ -12,8 +12,11 @@ struct Fetch: AsyncParsableCommand {
     @Option(name: .long)
     var sort: Github.SortBy = .updated
 
-    @Option
+    @Option(name: .shortAndLong)
     var page: Int?
+
+    @Option(name: .long)
+    var perPage: Int = 100
 
     func runAsync() async throws {
         print("importing...")
@@ -25,9 +28,11 @@ struct Fetch: AsyncParsableCommand {
 
         if let page = page {
             let results = try await Github.search(query: "in:path Package.swift",
+                                                  sortBy: sort,
+                                                  orderBy: order,
                                                   token: token,
                                                   page: page,
-                                                  perPage: 100)
+                                                  perPage: perPage)
             packageURLs = results.items.map(\.cloneUrl)
             print("received \(packageURLs.count) / \(results.totalCount)")
         } else {  // fetch all
