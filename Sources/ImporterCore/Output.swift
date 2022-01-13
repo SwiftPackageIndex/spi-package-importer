@@ -20,7 +20,7 @@ enum Output: ExpressibleByArgument {
         switch self {
             case .file(let url):
                 let encoder = JSONEncoder()
-                encoder.outputFormatting = .prettyPrinted
+                encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes]
                 let data = try encoder.encode(packageURLs)
                 print("saving to \(url.path)...")
                 try data.write(to: url)
