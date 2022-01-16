@@ -7,3 +7,4 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .swiftpm/xcode/xcshareddata/xcschemes/spi-package-importer.xcscheme
 /*.json
+.vscode/
