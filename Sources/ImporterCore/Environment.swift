@@ -20,8 +20,8 @@ extension Environment {
                 return token
             } else {
                 return try? Keychain.readString(
-                    service: "Github finestructure Personal Access Token",
-                    account: "finestructure"
+                    service: "Github Personal Access Token - spi-importer",
+                    account: "spi-importer"
                 )
             }
         }
