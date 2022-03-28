@@ -25,4 +25,9 @@ final class ImporterCoreTests: XCTestCase {
         XCTAssertEqual(urls.subtracting(Set([.init(url: "A")])).map(\.url), ["B"])
     }
 
+    func test_Merge_sorting() throws {
+        // Ensure results after merging are sorted
+        XCTAssertEqual(Merge.merge(["b", "a"], ["c", "A"]), ["A", "a", "b", "c"])
+    }
+
 }
