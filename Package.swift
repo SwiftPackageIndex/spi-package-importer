@@ -8,6 +8,9 @@ let package = Package(
     platforms: [
         .macOS(.v12)
     ],
+    products: [
+        .executable(name: "spi-package-importer", targets: ["importer"])
+    ],
     dependencies: [
         .package(name: "swift-argument-parser",
                  url: "https://github.com/apple/swift-argument-parser",
